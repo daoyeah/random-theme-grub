@@ -1,0 +1,11 @@
+[Unit]
+Description=Update link at boot or shutdown
+After=multi-user.target
+
+[Service]
+Type=oneshot
+ExecStart=/usr/local/bin/update_grubtheme_link.sh
+
+[Install]
+WantedBy=multi-user.target
+

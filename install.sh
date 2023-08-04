@@ -25,7 +25,7 @@ function replace_or_append_key_value_pair() {
 
   echo "Done!"
 }
- 
+
 grubheaderfile=/etc/grub.d/00_header
 TMPFILE=$(mktemp)
 cp $grubheaderfile  $TMPFILE
@@ -37,6 +37,19 @@ if [ -d ./themes ] ; then
 	echo "sudo cp  ./themes/* /usr/share/grub/themes/"
 	sudo cp  ./themes/* /usr/share/grub/themes/  -a
 fi
+
+#read -rsn 1 -t 3 -p "Do you want to remember your last choice? (Y/N): " key
+read  -t 3 -p "Do you want to remember your last choice? (Y/N): " key
+etcgrubconfig=/etc/default/grub
+cp $etcgrubconfig  $TMPFILE
+if [[ "$key" == [Yy] ]]; then
+    echo "you chose to remember last choice."
+    replace_or_append_key_value_pair $TMPFILE  GRUB_DEFAULT saved
+else
+	echo ""
+    replace_or_append_key_value_pair $TMPFILE  GRUB_DEFAULT 0
+fi
+sudo cp  $TMPFILE $etcgrubconfig
 
 echo "sudo cp update_grubtheme_link.sh /usr/local/bin/"
 sudo cp update_grubtheme_link.sh /usr/local/bin/

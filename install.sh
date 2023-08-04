@@ -49,6 +49,7 @@ else
 	echo ""
     replace_or_append_key_value_pair $TMPFILE  GRUB_DEFAULT 0
 fi
+ replace_or_append_key_value_pair $TMPFILE GRUB_DISABLE_OS_PROBER false
 sudo cp  $TMPFILE $etcgrubconfig
 
 echo "sudo cp update_grubtheme_link.sh /usr/local/bin/"

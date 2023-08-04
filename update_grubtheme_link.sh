@@ -42,7 +42,7 @@ if [ ${#image_files[@]} -gt 0 ]; then
 	selected_index=$((RANDOM % ${#image_files[@]}))
 	selected_image="${image_files[$selected_index]}" 
 	echo "随机选择的图片文件：$selected_image" 
-	sudo  convert -resize 1920x1080  $selected_image   /boot/grub/grub.png
+	sudo  convert -resize 1920x1080  "$selected_image"   /boot/grub/grub.png
 fi
 
 sudo update-grub
